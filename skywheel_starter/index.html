@@ -18,7 +18,7 @@
 
         // GLBファイルの読み込み
         const loader = new THREE.GLTFLoader();
-        loader.load('public/Scani.glb', function (gltf) {
+        loader.load('public/alfa_romeo_75.glb', function (gltf) {
             scene.add(gltf.scene);
             gltf.scene.scale.set(0.5, 0.5, 0.5); // モデルのスケール調整
         });
