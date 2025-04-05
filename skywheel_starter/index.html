@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skywheel 3D Model</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-</head>
-<body>
-    <script>
+    <!-- ES Modules形式で読み込む -->
+    <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.module.js';
+        import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.150.0/examples/js/loaders/GLTFLoader.js';
+
         // シーン、カメラ、レンダラーの作成
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -17,10 +17,12 @@
         document.body.appendChild(renderer.domElement);
 
         // GLBファイルの読み込み
-        const loader = new THREE.GLTFLoader();
-        loader.load('public/alfa_romeo_75.glb', function (gltf) {
+        const loader = new GLTFLoader();
+        loader.load('/alfa_romeo_75.glb', function (gltf) {
             scene.add(gltf.scene);
             gltf.scene.scale.set(0.5, 0.5, 0.5); // モデルのスケール調整
+        }, undefined, function (error) {
+            console.error('Error loading GLB model:', error);
         });
 
         camera.position.z = 5;
@@ -32,5 +34,7 @@
 
         animate();
     </script>
+</head>
+<body>
 </body>
 </html>
